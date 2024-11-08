@@ -31,7 +31,8 @@ def mov_ups():
                     ey=0
                     ex=0
                     for ik, iv in outer_value.items():
-                        match iv:
+                        print(iv)
+                        match ik:
                             case "cx":
                                 cx = iv
                             case "cy":
@@ -39,7 +40,8 @@ def mov_ups():
                             case "ey":
                                 ey=iv
                             case "ex":
-                                ex=ev
+                                ex=iv
+                    print(f"ex:{ex}ey:{ey}cx:{cx}cy:{cy}")
                     if extended == True:
                         invoke(mod.animate('x',ex,duration=1,curve=curve.linear))
                         invoke(mod.animate('y',ey,duration=1,curve=curve.linear))
@@ -88,6 +90,7 @@ def auto_generate_gold(value=1, interval=1):
 #Game Loop
 def update():
     global gold
+    print(gold_gen_upgrade.position)
     for b in (gold_gen_upgrade, ):
         if gold >= b.cost:
             b.disabled = False
