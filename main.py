@@ -62,6 +62,9 @@ def buy_auto_gum():
         ding.play()
         gum -= gum_up.cost
         counter.text = str(gum)
+        gum_up.cost *= 1.5
+        gum_up.cost = int(gum_up.cost)
+        gum_up.tooltip.text = f'<pink>Gum Generator\n<default>Earn 1 gum every second.\nCosts {gum_up.cost} gum.'
         invoke(auto_generate_gum, 1, 1)
 def collapse():
     global extended
