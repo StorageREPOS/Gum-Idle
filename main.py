@@ -5,6 +5,8 @@ app = Ursina()
 #Var Delclairation
 window.color = color._20
 gold = 0
+#Panel Entities
+
 #Text Entities
 counter = Text(text='0', y=.25, z=-1, scale=2, origin=(0,0), background=True)
 #Button Entities
