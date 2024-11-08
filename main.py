@@ -1,4 +1,5 @@
 #Imports
+import upgrades
 from ursina import *
 #Init Engine
 app = Ursina()
@@ -38,6 +39,10 @@ def collapse():
     else:
         upanel.animate('x',-5.800000190734863, duration=1, curve=curve.linear)
         collapser.animate('x', -0.6000000238418579, duration=1, curve=curve.linear)
+        for upgradex in upgrades.upgrades.items():
+            print(str(upgradex))
+            mod = globals().get(upgradex.name,"No such variable")
+            invoke(mod.animate('x',-5,duration=1,curve=curve.linear))        
         extended = True
         collapser.texture = load_texture('collapser.png') 
 #Signal Connections
