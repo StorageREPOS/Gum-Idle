@@ -62,10 +62,10 @@ def buy_auto_gum():
         ding.play()
         gum -= gum_up.cost
         counter.text = str(gum)
-        gum_up.cost *= 1.5
+        gum_up.cost *= 1.2
         gum_up.cost = int(gum_up.cost)
         gum_up.tooltip.text = f'<pink>Gum Generator\n<default>Earn 1 gum every second.\nCosts {gum_up.cost} gum.'
-        invoke(auto_generate_gum, 1, 1)
+        invoke(auto_generate_gum, .1, 1)
 def collapse():
     global extended
     if extended:
@@ -85,9 +85,10 @@ gumball.on_click = gumball_click
 gum_up.on_click = buy_auto_gum
 collapser.on_click = collapse
 #Methods
-def auto_generate_gum(value=1, interval=1):
+def auto_generate_gum(value=.1, interval=1):
     global gum
     gum += value
+    gum = round(gum,2)
     counter.text = str(gum)
     invoke(auto_generate_gum, value, delay=interval)
 #Game Loop
