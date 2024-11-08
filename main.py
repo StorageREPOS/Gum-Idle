@@ -10,6 +10,7 @@ extended = True
 #Set SFX
 smack = Audio(sound_file_name=os.path.join('smack.mp3'), loop=False, autoplay=False)
 lofi = Audio(sound_file_name=os.path.join('lofi.mp3'),loop=True,autoplay=True)
+ding = Audio(sound_file_name=os.path.join('ding.mp3'), loop=False, autoplay=False)
 #Set Entities
 upanel = Entity(model='quad', scale=(3, 200), color=color.dark_gray, alpha=0.5, x=-5.8)
 #Set Texts
@@ -58,6 +59,7 @@ def gumball_click():
 def buy_auto_gum():
     global gum
     if gum >= gum_up.cost:
+        ding.play()
         gum -= gum_up.cost
         counter.text = str(gum)
         invoke(auto_generate_gum, 1, 1)
