@@ -1,9 +1,9 @@
 upgrades = {
     "gold_gen":{
         "name": "gold_gen_upgrade",
-        "ex": 1,
+        "ex": 2,
         "ey":2,
-        "cx":1,
+        "cx":-2,
         "cy":2,
     }
 }

@@ -16,6 +16,36 @@ collapser = Button(texture=load_texture("collapser.png"), color=color.light_gray
 gumball = Button(texture=load_texture("gumball_pink.png"), color=color.white, scale=.225)
 gold_gen_upgrade = Button(cost=10, x=.2, scale=.125, color=color.dark_gray, disabled=True)
 gold_gen_upgrade.tooltip = Tooltip(f'<gold>Gold Generator\n<default>Earn 1 gold every second.\nCosts {gold_gen_upgrade.cost} gold.')
+#TLD Methods
+def mov_ups():
+    for outer_key, outer_value in upgrades.upgrades.items():
+      if isinstance(outer_value, dict):
+            for inner_key, inner_value in outer_value.items():
+                if inner_key == "name":
+                    print(f"Found 'name' under key '{outer_key}': {inner_value}")
+                    mod = globals().get(inner_value,"No such variable")
+                    print(mod)
+                    print(outer_key)
+                    cx=0
+                    cy=0
+                    ey=0
+                    ex=0
+                    for ik, iv in outer_value.items():
+                        match iv:
+                            case "cx":
+                                cx = iv
+                            case "cy":
+                                cy=iv
+                            case "ey":
+                                ey=iv
+                            case "ex":
+                                ex=ev
+                    if extended == True:
+                        invoke(mod.animate('x',ex,duration=1,curve=curve.linear))
+                        invoke(mod.animate('y',ey,duration=1,curve=curve.linear))
+                    elif extended == False:
+                        invoke(mod.animate('x',cx,duration=1,curve=curve.linear))
+                        invoke(mod.animate('y',cy,duration=1,curve=curve.linear))
 #Signals
 def gumball_click():
     global gold
@@ -36,15 +66,13 @@ def collapse():
         collapser.animate('x', -0.8300000429153442, duration=1, curve=curve.linear)
         extended = False
         collapser.texture = load_texture('extender.png')  # Change texture instantly
+        mov_ups()
     else:
         upanel.animate('x',-5.800000190734863, duration=1, curve=curve.linear)
         collapser.animate('x', -0.6000000238418579, duration=1, curve=curve.linear)
-        for upgradex in upgrades.upgrades.items():
-            print(str(upgradex))
-            mod = globals().get(upgradex.name,"No such variable")
-            invoke(mod.animate('x',-5,duration=1,curve=curve.linear))        
         extended = True
-        collapser.texture = load_texture('collapser.png') 
+        collapser.texture = load_texture('collapser.png')
+        mov_ups()
 #Signal Connections
 gumball.on_click = gumball_click
 gold_gen_upgrade.on_click = buy_auto_gold
