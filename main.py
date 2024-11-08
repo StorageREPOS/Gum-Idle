@@ -7,6 +7,9 @@ app = Ursina()
 window.color = color.gray
 gum = 0
 extended = True
+#Set SFX
+smack = Audio(sound_file_name=os.path.join('smack.mp3'), loop=False, autoplay=False)
+lofi = Audio(sound_file_name=os.path.join('lofi.mp3'),loop=True,autoplay=True)
 #Set Entities
 upanel = Entity(model='quad', scale=(3, 200), color=color.dark_gray, alpha=0.5, x=-5.8)
 #Set Texts
@@ -14,6 +17,7 @@ counter = Text(text='0', y=.25, z=-1, scale=2, origin=(0, 0), background=True)
 #Set Buttons
 collapser = Button(texture=load_texture("collapser.png"), color=color.light_gray, scale=.125, z=-3, x=-.6, y=.45)
 gumball = Button(texture=load_texture("gumball_pink.png"), color=color.white, scale=.225)
+gumball.tooltip = Tooltip(f'<pink>Gum Ball\n<default>Bite this to gain more gum!')
 gum_up = Button(text="Gum Gen",cost=10, x=-.71, scale_y =.125, scale_x=.250, color=color.red,y=.33, disabled=True)
 gum_up.tooltip = Tooltip(f'<pink>Gum Generator\n<default>Earn 1 gum every second.\nCosts {gum_up.cost} gum.')
 #TLD Methods
@@ -46,6 +50,7 @@ def mov_ups():
 #Signals
 def gumball_click():
     global gum
+    smack.play()
     gum += 1
     counter.text = str(gum)
     gumball.animate_scale(.240, .2, curve=curve.linear)
